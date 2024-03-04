@@ -1,0 +1,22 @@
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  get_modified_files:
+    name: Get modified files
+    runs-on: ubuntu-latest
+    outputs:
+      salida: ${{ steps.imprimir.outputs.respuesta }}
+    steps:
+      - name: Check code
+        uses: actions/checkout@master
+        with:
+          fetch-depth: 0
+
+      - name: Modified files
+        id: imprimir
+        run: |
+          git fetch origin main:main
+          echo "::set-output name=changed::$($ git diff --diff-filter=acdmrt data.csv)"
+    
