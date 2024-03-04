@@ -1,0 +1,16 @@
+on:
+  workflow_run:
+    workflows: ["Detectar cambios en archivo específico"]
+    types:
+      - completed
+
+jobs:
+  execute_script:
+    name: Execute conversion Script
+    runs-on: ubuntu-latest
+    if: ${{ needs.get_modified_files.outputs.changed == 'data/data.csv' }}
+    steps:
+      - name: Checkout del repositorio
+        uses: actions/checkout@v2
+      - name: Ejecutar script
+        run: ./csv-to-json.py
