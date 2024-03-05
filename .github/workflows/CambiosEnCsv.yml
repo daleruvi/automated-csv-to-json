@@ -18,4 +18,4 @@ jobs:
         id: imprimir
         run: |
           git fetch origin main
-          echo "::set-output name=changed::$($ git diff --diff-filter=acdmrt data.csv)"
+          echo "::set-output name=changed::$(git diff --diff-filter=acdmrt data.csv)"
