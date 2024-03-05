@@ -16,7 +16,7 @@ jobs:
 
       - name: Modified files
         id: imprimir
-        run: echo "::set-output name=respuesta::$(git diff --diff-filter=acdmrt -- data.csv)"
+        run: echo "::set-output name=respuesta::$(git diff --name-only ${{ github.event.before }} ${{ github.sha }})"
 
   execute_script:
     needs: get_modified_files
